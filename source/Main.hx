@@ -72,6 +72,8 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		SUtil.check();
+		
 		addChild(new FlxGame(0, 0, TitleState, 1, 60, 60, true, false));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
