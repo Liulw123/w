@@ -872,7 +872,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('scripts/')]
+		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('scripts/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
