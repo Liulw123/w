@@ -39,8 +39,6 @@ class Main extends Sprite
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 	
-	public static var path:String = System.applicationStorageDirectory;
-
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
@@ -107,7 +105,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = Main.path + "./crash/" + "PsychEngine_" + dateNow + ".txt";
+		path = SUtil.getPath() + "./crash/" + "PsychEngine_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -122,8 +120,8 @@ class Main extends Sprite
 
 		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
 
-		if (!OpenFlAssets.exists("./crash/"))
-			FileSystem.createDirectory(Main.path + "./crash/");
+		if (!OpenFlAssets.exists(SUtil.getPath() + "crash/"))
+			FileSystem.createDirectory(SUtil.getPath() + "crash/");
 
 		File.saveContent(path, errMsg + "\n");
 
