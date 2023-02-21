@@ -74,7 +74,7 @@ class Main extends Sprite
 	{
 		SUtil.check();
 		
-		addChild(new FlxGame(0, 0, TitleState, 1, 60, 60, true, false));
+		addChild(new FlxGame(0, 0, TitleState, 1, 60, 60, skipSplash, startFullscreen));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
