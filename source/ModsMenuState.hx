@@ -333,11 +333,10 @@ class ModsMenuState extends MusicBeatState
 			var newMod:ModMetadata = new ModMetadata(values[0]);
 			mods.push(newMod);
 
-			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true, false, 0.05);
+			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true);
 			var scale:Float = Math.min(840 / newMod.alphabet.width, 1);
-			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true, false, 0.05, scale);
-			newMod.alphabet.y = i * 150;
-			newMod.alphabet.x = 310;
+			newMod.alphabet.scaleX = scale;
+			newMod.alphabet.scaleY = scale;
 			add(newMod.alphabet);
 			//Don't ever cache the icons, it's a waste of loaded memory
 			var loadedIcon:BitmapData = null;
