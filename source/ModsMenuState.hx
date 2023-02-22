@@ -23,7 +23,11 @@ import haxe.Json;
 import haxe.format.JsonParser;
 import openfl.display.BitmapData;
 import flash.geom.Rectangle;
+#if android
+import android.flixel.FlxButton;
+#else
 import flixel.ui.FlxButton;
+#end
 import flixel.FlxBasic;
 import sys.io.File;
 /*import haxe.zip.Reader;
@@ -329,10 +333,9 @@ class ModsMenuState extends MusicBeatState
 			var newMod:ModMetadata = new ModMetadata(values[0]);
 			mods.push(newMod);
 
-			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true);
+			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true, false, 0.05);
 			var scale:Float = Math.min(840 / newMod.alphabet.width, 1);
-			newMod.alphabet.scaleX = scale;
-			newMod.alphabet.scaleY = scale;
+			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true, false, 0.05, scale);
 			newMod.alphabet.y = i * 150;
 			newMod.alphabet.x = 310;
 			add(newMod.alphabet);
@@ -375,7 +378,13 @@ class ModsMenuState extends MusicBeatState
 		updatePosition();
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
+		#if !android
 		FlxG.mouse.visible = true;
+		#end
+
+		#if android
+		addVirtualPad(UP_DOWN, B);
+		#end
 
 		super.create();
 	}
@@ -457,7 +466,7 @@ class ModsMenuState extends MusicBeatState
 			fileStr += values[0] + '|' + (values[1] ? '1' : '0');
 		}
 
-		var path:String = 'modsList.txt';
+		var path:String = SUtil.getPath() + 'modsList.txt';
 		File.saveContent(path, fileStr);
 		Paths.pushGlobalMods();
 	}
@@ -478,7 +487,9 @@ class ModsMenuState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			#if !android
 			FlxG.mouse.visible = false;
+			#end
 			saveTxt();
 			if(needaReset)
 			{
