@@ -865,8 +865,6 @@ class PlayState extends MusicBeatState
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
 		#end
-		
-		FileSystem.createDirectory(SUtil.getPath + "assets"); // saving lines
 
 		// "GLOBAL" SCRIPT
 		#if LUA_ALLOWED
